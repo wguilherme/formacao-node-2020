@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 
-//usar EJS como renderizador de html
+// usar EJS como renderizador de html
 app.set("view engine", "ejs");
+// static folder
+app.use(express.static("public"));
 
 app.get("/", function (req, res) {
   const produtos = [
