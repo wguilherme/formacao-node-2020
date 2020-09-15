@@ -10,9 +10,14 @@ var io = require('socket.io')(http)
 // sempre que um cliente se conecta
 // param socket é o cliente
 io.on("connection", (socket) => {
-   console.log(socket)
+   // console.log(socket)
    // ID do client
    console.log(socket.id)
+
+
+   socket.on("boasvindas", (data) => {
+      console.log(data)
+   })
 
 })
 
