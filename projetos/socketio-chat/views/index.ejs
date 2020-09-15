@@ -3,26 +3,43 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
    <title>Document</title>
 </head>
 <body>
 
+   <div class="container">
 
-   <h1>Chat realtime</h1>
+
+
+
+   <h2 class="text-center m-4">Chat realtime</h2>
 
    <div id="chat">
 
    </div>
    <br>
 
-   <input type="text" id="msg" placeholder="Escreva sua mensagem"><br>
-   <input type="text" id="username" placeholder="Seu nome de usuário">
-   <br>
-   <button onclick="enviar()">Enviar</button>
+   <input class="form-control mb-3" type="text" id="msg" placeholder="Mensagem...">
+   <input class="form-control mb-3" type="text" id="username" placeholder="Usuário">
+
+   <button class="btn btn-primary btn-lg btn-block" onclick="enviar()">Enviar</button>
+</div>
 
 
 
+<style>
+   #chat {
+      max-height: 500px;
+      min-height: 500px;
+      background-color: aliceblue;
+      padding: 20px;
+      overflow-y: scroll;
+   }
 
+</style>
 
 </body>
 
@@ -37,16 +54,29 @@ socket.on('disconnect', () => {
    console.log('desconectado')
 });
 
+socket.on('showMsg', (data) => {
+
+   var chat = document.getElementById("chat")
+   chat.innerHTML += `${data.username}: ${data.msg} <br>`
+});
+
 
 function enviar(){
    var msgField = document.getElementById("msg")
    var usernameField = document.getElementById("username")
+   var chat = document.getElementById("chat")
 
    var msg = msgField.value
    var username = usernameField.value
 
+
+   chat.innerHTML += `${msg}: ${username} <br>`
+
+   
    // verboso pois tem navegadores que não aceitam este recurso ainda
    socket.emit("msg", {msg: msg, username: username});
+   
+
 }
 
 </script>

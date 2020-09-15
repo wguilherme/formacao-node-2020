@@ -16,7 +16,18 @@ io.on("connection", (socket) => {
    })
 
    // ao receber uma msg, enviar a msg para o showmsg
-   socket.on('msg', (data) => { socket.emit('showmsg', data); })
+   socket.on('msg', (data) => { 
+
+      // aqui ele responde apenas pro client (socket)
+      // socket.emit('showmsg', data); 
+
+      // se quiser enviar para todo mundo, deve-se enviar como io.emit
+      io.emit('showmsg', data); 
+
+      // outra opção seria o socket.broadcast.emit()
+      // ele envia pra todo mundo através do  socketclient menos pro client que mandou
+   
+   })
 
 })
 
