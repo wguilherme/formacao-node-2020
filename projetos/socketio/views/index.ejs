@@ -17,6 +17,13 @@
 const socket = io("http://localhost:3000")
 // enviar informações para o servidor
 // da pra passar qualquer dado
+
+socket.on('disconnect', () => {
+   console.log('desconectado')
+})
+
+
+
 socket.emit("boasvindas", {nome: "Withney Guilherme"})
 
 socket.on("resultado", (data)=> {

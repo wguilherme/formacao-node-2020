@@ -10,31 +10,15 @@ var io = require('socket.io')(http)
 // sempre que um cliente se conecta
 // param socket é o cliente
 io.on("connection", (socket) => {
-   // console.log(socket)
-   // ID do client
-   // console.log(socket.id)
 
-   // saiu do servidor
    socket.on('disconnect', ()=> {
       console.log(socket.id + " Se desconectou")
    })
 
-
-
-   //entrou no servidor
-   socket.on("boasvindas", (data) => {
-      console.log(data)
-   })
-
-   socket.on("palavra", (data) => {
-      console.log(data)
-      socket.emit("resultado", data )
-   })
-
 })
 
-app.set('view engine', 'ejs');
 
+app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
    res.render("index");
