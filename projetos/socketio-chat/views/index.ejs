@@ -12,9 +12,6 @@
 
    <div class="container">
 
-
-
-
    <h2 class="text-center m-4">Chat realtime</h2>
 
    <div id="chat">
@@ -48,13 +45,13 @@
 
 <script>
 
-const socket = io("http://localhost:3000")
+const socket = io("http://b15ab7c8e0a7.ngrok.io")
 
 socket.on('disconnect', () => {
    console.log('desconectado')
 });
 
-socket.on('showMsg', (data) => {
+socket.on('showmsg', (data) => {
 
    var chat = document.getElementById("chat")
    chat.innerHTML += `${data.username}: ${data.msg} <br>`
@@ -70,7 +67,7 @@ function enviar(){
    var username = usernameField.value
 
 
-   chat.innerHTML += `${msg}: ${username} <br>`
+   // chat.innerHTML += `${msg}: ${username} <br>`
 
    
    // verboso pois tem navegadores que não aceitam este recurso ainda
