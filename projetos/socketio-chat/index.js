@@ -15,6 +15,9 @@ io.on("connection", (socket) => {
       console.log(socket.id + " Se desconectou")
    })
 
+   // ao receber uma msg, enviar a msg para o showmsg
+   socket.on('msg', (data) => { socket.emit('showmsg', data); })
+
 })
 
 

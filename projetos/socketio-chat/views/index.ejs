@@ -8,6 +8,19 @@
 <body>
 
 
+   <h1>Chat realtime</h1>
+
+   <div id="chat">
+
+   </div>
+   <br>
+
+   <input type="text" id="msg" placeholder="Escreva sua mensagem"><br>
+   <input type="text" id="username" placeholder="Seu nome de usuário">
+   <br>
+   <button onclick="enviar()">Enviar</button>
+
+
 
 
 
@@ -23,6 +36,18 @@ const socket = io("http://localhost:3000")
 socket.on('disconnect', () => {
    console.log('desconectado')
 });
+
+
+function enviar(){
+   var msgField = document.getElementById("msg")
+   var usernameField = document.getElementById("username")
+
+   var msg = msgField.value
+   var username = usernameField.value
+
+   // verboso pois tem navegadores que não aceitam este recurso ainda
+   socket.emit("msg", {msg: msg, username: username});
+}
 
 </script>
 </html>
