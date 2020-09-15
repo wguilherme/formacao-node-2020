@@ -8,6 +8,8 @@
 <body>
    <input type="text" id="palavra">
    <button onclick="enviar()" >Enviar</button>
+   <hr>
+   <p id="resultado"></p>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
@@ -17,10 +19,23 @@ const socket = io("http://localhost:3000")
 // da pra passar qualquer dado
 socket.emit("boasvindas", {nome: "Withney Guilherme"})
 
+socket.on("resultado", (data)=> {
+   console.log(data)
+
+   var p = document.getElementById("resultado")
+   p.innerHTML = data;
+})
+
+
+
+
 
 function enviar(){
    var input = document.getElementById("palavra");
-   console.log(input.value)
+   // console.log(input.value)
+   
+   // aqui, palavra é o NOME do evento que pode ser escutado
+   socket.emit("palavra", input.value)
 }
 </script>
 </html>

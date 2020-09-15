@@ -19,6 +19,11 @@ io.on("connection", (socket) => {
       console.log(data)
    })
 
+   socket.on("palavra", (data) => {
+      console.log(data)
+      socket.emit("resultado", data )
+   })
+
 })
 
 app.set('view engine', 'ejs');
